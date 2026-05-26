@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>コール集 - ≠ME Fan Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* --- コール集専用の追加デザイン --- */
+      .page-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .intro-text {
+        color: #666;
+        margin-bottom: 30px;
+        line-height: 1.6;
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .song-card {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 25px;
+        overflow: hidden;
+      }
+
+      /* 曲名のバー */
+      .song-header {
+        background: #00dca0; /* ノイミーカラー */
+        color: white;
+        padding: 15px 20px;
+        font-size: 1.3em;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .song-content {
+        padding: 20px;
+      }
+
+      .part-label {
+        display: inline-block;
+        background: #eee;
+        color: #555;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: bold;
+        margin: 15px 0 10px 0;
+      }
+
+      /* 歌詞とコールの表示形式 */
+      .call-block {
+        margin-bottom: 10px;
+        line-height: 1.8;
+      }
+
+      .lyrics {
+        color: #333;
+      }
+
+      .call {
+        color: #ff6b81; /* コールは目立つピンク色に！ */
+        font-weight: bold;
+        background: #fff0f5;
+        padding: 2px 8px;
+        border-radius: 5px;
+        margin-left: 5px;
+        display: inline-block;
+      }
+
+      /* MIX専用のデザイン（タイガー、ファイヤーなど） */
+      .mix-call {
+        color: #4285f4; /* MIXは青色で区別 */
+        font-weight: bold;
+        font-size: 0.95em;
+        letter-spacing: 1px;
+      }
+
+      /* スマホ対応 */
+      @media (max-width: 600px) {
+        .song-header {
+          font-size: 1.1em;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body id="top">
+    <header>
+      <a href="index.html" class="site-logo">≠ME Fan Portal</a>
+    </header>
+
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav class="nav-menu" id="nav-menu">
+      <a href="index.html">🏠 トップページ</a>
+      <a href="lyrics.html">🎤 歌割り集</a>
+      <a href="calls.html">📣 コール集</a>
+      <a href="get_schedule/schedule.html">📅 スケジュール</a>
+    </nav>
+
+    <div class="page-content">
+      <h1>📣 ライブ・コール集</h1>
+      <p class="intro-text">
+        ライブをもっと楽しむためのコール（掛け声）まとめです。<br />
+        <span class="call">ピンク色の文字</span>
+        がファンのみんなで声を出して盛り上がる部分です！初めての方もぜひ覚えて一緒に叫びましょう✨
+      </p>
+
+      <div class="song-card">
+        <div class="song-header">
+          <span>🎵 ≠ME（ノットイコールミー）</span>
+        </div>
+        <div class="song-content">
+          <div class="part-label">イントロ（Overture明け）</div>
+          <div class="call-block">
+            <span class="mix-call"
+              >「タイガー！ファイヤー！サイバー！ファイバー！ダイバー！バイバー！ジャージャー！」</span
+            >
+          </div>
+
+          <div class="part-label">1番 Aメロ</div>
+          <div class="call-block">
+            <span class="lyrics">君はいつも僕の前を 一歩先歩いてるんだ</span
+            ><br />
+            <span class="call">（おーれーの！ な・な・か！）</span>
+          </div>
+          <div class="call-block">
+            <span class="lyrics">振り返る君が笑う</span>
+            <span class="call">（オレモー！）</span>
+          </div>
+
+          <div class="part-label">サビ</div>
+          <div class="call-block">
+            <span class="lyrics">好きだ！</span>
+            <span class="call">（好きだ！）</span><br />
+            <span class="lyrics">大声で 伝えたら どうなるの？</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="song-card">
+        <div class="song-header">
+          <span>🎵 てゆーか、みるてんって何？</span>
+        </div>
+        <div class="song-content">
+          <div class="part-label">イントロ</div>
+          <div class="call-block">
+            <span class="lyrics">みる何ー！？</span><br />
+            <span class="call">（みるてん！）</span> × 4回
+          </div>
+
+          <div class="part-label">Aメロ</div>
+          <div class="call-block">
+            <span class="lyrics">地球の真ん中 みるてんだよー！</span><br />
+            <span class="call">（みるてん！）</span>
+          </div>
+          <div class="call-block">
+            <span class="lyrics">今日も1日</span>
+            <span class="call">（がんばるぞい！）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="song-card">
+        <div class="song-header">
+          <span>🎵 秘密インシデント</span>
+        </div>
+        <div class="song-content">
+          <div class="part-label">イントロ</div>
+          <div class="call-block">
+            <span class="mix-call"
+              >「ミョーホントゥスケ！化繊飛鳥！<br />振動！海女！繊維！海女！振動！化繊飛鳥！<br />チャペアペカラキナ！カラアペチャペ！<br />除去飛除去！虎虎虎！」</span
+            ><br />
+            ※ガチ恋口上やアイヌ語MIXなどが入る定番曲です！
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("hamburger").classList.toggle("active");
+        document.getElementById("nav-menu").classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>
