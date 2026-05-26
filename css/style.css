@@ -47,6 +47,9 @@ header {
   border: 2px dashed #00dca0;
   padding: 5px 15px;
   border-radius: 20px;
+  display: inline-block;
+  font-family:
+    "Hiragino Maru Gothic ProN", "Rounded M+ 1c", "Quicksand", sans-serif;
 }
 
 .hamburger {
@@ -386,4 +389,155 @@ li a:hover {
 .shiorin {
   color: blue;
   font-weight: bold;
+}
+
+/* ================================================= */
+/* 9. スケジュールページ専用（統合版）                */
+/* ================================================= */
+.schedule-list {
+  list-style: none;
+  padding: 0;
+}
+
+.schedule-item {
+  background: #ffffff;
+  margin-bottom: 15px;
+  padding: 18px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+  display: flex;
+  align-items: center;
+  border-left: 6px solid #ffb6c1;
+  flex-wrap: wrap;
+  transition: transform 0.2s;
+}
+.schedule-item.is-soon {
+  border: 2px solid #ffb6c1;
+  background: #fffafa;
+}
+.soon-label {
+  color: #ff6b81;
+  font-size: 0.7em;
+  font-weight: bold;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 5px;
+  border: 1px solid #ff6b81;
+  margin-left: 8px;
+}
+.schedule-date {
+  font-weight: bold;
+  color: #ffb6c1;
+  font-size: 1.1em;
+  margin-right: 15px;
+  white-space: nowrap;
+}
+.schedule-cat {
+  background: #00dca0;
+  color: white;
+  font-size: 0.75em;
+  font-weight: bold;
+  padding: 3px 12px;
+  border-radius: 50px;
+  margin-right: 15px;
+}
+.schedule-title {
+  color: #555;
+  font-weight: bold;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+.schedule-title a {
+  color: #ff6b81;
+  text-decoration: none;
+}
+.schedule-title a:hover {
+  text-decoration: underline;
+}
+
+.download-all-btn {
+  display: block;
+  background: #ff6b81;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 50px;
+  margin: 20px auto;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  max-width: 400px;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
+}
+.download-all-btn:hover {
+  background: #ff8fa3;
+  transform: translateY(-3px);
+}
+
+.jump-btn {
+  display: block;
+  margin: 10px auto;
+  background: #fff;
+  border: 2px solid #ffb6c1;
+  color: #ffb6c1;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filter-area {
+  background: #fff0f5;
+  padding: 20px;
+  border-radius: 30px;
+  margin-bottom: 25px;
+}
+.filter-label {
+  font-weight: bold;
+  color: #ff6b81;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.clear-btn {
+  font-size: 0.7em;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #ff6b81;
+  border-radius: 10px;
+  color: #ff6b81;
+  padding: 2px 8px;
+}
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+.pill-label {
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.pill-label input[type="checkbox"] {
+  display: none;
+}
+.pill-text {
+  display: inline-block;
+  padding: 6px 12px;
+  background: white;
+  border: 2px solid #ffb6c1;
+  border-radius: 20px;
+  color: #555;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.pill-label input[type="checkbox"]:checked + .pill-text {
+  background: #ffb6c1;
+  color: white;
 }
