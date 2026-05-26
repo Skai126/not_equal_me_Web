@@ -6,22 +6,46 @@
     <title>スケジュール - ≠ME Fan Portal</title>
     <link rel="stylesheet" href="css/style.css" />
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: #fff9fb;
+      }
       .schedule-list {
         list-style: none;
         padding: 0;
       }
+
+      /* カードデザイン */
       .schedule-item {
         background: #ffffff;
         margin-bottom: 15px;
-        padding: 15px 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding: 18px;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
         display: flex;
         align-items: center;
-        border-left: 5px solid #ffb6c1;
-        position: relative;
+        border-left: 6px solid #ffb6c1;
         flex-wrap: wrap;
+        transition: transform 0.2s;
       }
+      .schedule-item.is-soon {
+        border: 2px solid #ffb6c1;
+        background: #fffafa;
+      }
+      .soon-label {
+        color: #ff6b81;
+        font-size: 0.7em;
+        font-weight: bold;
+        background: white;
+        padding: 2px 6px;
+        border-radius: 5px;
+        border: 1px solid #ff6b81;
+        margin-left: 8px;
+      }
+
       .schedule-date {
         font-weight: bold;
         color: #ffb6c1;
@@ -32,14 +56,12 @@
       .schedule-cat {
         background: #00dca0;
         color: white;
-        font-size: 0.8em;
+        font-size: 0.75em;
         font-weight: bold;
-        padding: 4px 10px;
-        border-radius: 20px;
+        padding: 3px 12px;
+        border-radius: 50px;
         margin-right: 15px;
-        white-space: nowrap;
       }
-
       .schedule-title {
         color: #555;
         font-weight: bold;
@@ -49,32 +71,12 @@
       .schedule-title a {
         color: #ff6b81;
         text-decoration: none;
-        transition: 0.2s;
       }
       .schedule-title a:hover {
         text-decoration: underline;
-        opacity: 0.8;
       }
 
-      .gcal-btn {
-        display: inline-block;
-        background: #4285f4;
-        color: white;
-        text-decoration: none;
-        font-size: 0.8em;
-        font-weight: bold;
-        padding: 6px 12px;
-        border-radius: 5px;
-        margin-left: 10px;
-        white-space: nowrap;
-        transition: 0.2s;
-      }
-      .gcal-btn:hover {
-        background: #3367d6;
-        opacity: 0.9;
-      }
-
-      /* ★一括ダウンロードボタンのデザイン */
+      /* ボタン系 */
       .download-all-btn {
         display: block;
         background: #ff6b81;
@@ -83,64 +85,104 @@
         text-decoration: none;
         font-size: 1.1em;
         font-weight: bold;
-        padding: 12px 20px;
-        border-radius: 30px;
-        margin-bottom: 20px;
+        padding: 15px 30px;
+        border-radius: 50px;
+        margin: 20px auto;
         cursor: pointer;
-        transition: 0.2s;
         border: none;
         width: 100%;
         max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
       }
       .download-all-btn:hover {
-        background: #ff4757;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(255, 107, 129, 0.4);
+        background: #ff8fa3;
+        transform: translateY(-3px);
       }
 
-      #loading {
-        text-align: center;
-        color: #00dca0;
-        font-weight: bold;
-        margin-top: 30px;
-      }
-
-      .filter-area {
-        background: #fff0f5;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .filter-area select {
-        padding: 8px 15px;
+      .jump-btn {
+        display: block;
+        margin: 10px auto;
+        background: #fff;
+        border: 2px solid #ffb6c1;
+        color: #ffb6c1;
+        padding: 8px 20px;
         border-radius: 20px;
-        border: 1px solid #ffb6c1;
-        outline: none;
-        font-size: 1em;
-        color: #555;
-        background: white;
+        font-weight: bold;
         cursor: pointer;
       }
 
-      @media (max-width: 600px) {
-        .schedule-item {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .schedule-date,
-        .schedule-cat {
-          margin-bottom: 5px;
-        }
-        .gcal-btn {
-          margin-left: 0;
-          margin-top: 10px;
-        }
+      /* フィルター */
+      .filter-area {
+        background: #fff0f5;
+        padding: 20px;
+        border-radius: 30px;
+        margin-bottom: 25px;
+      }
+      .filter-label {
+        font-weight: bold;
+        color: #ff6b81;
+        font-size: 0.9em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .clear-btn {
+        font-size: 0.7em;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #ff6b81;
+        border-radius: 10px;
+        color: #ff6b81;
+        padding: 2px 8px;
+      }
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+      }
+      .pill-label {
+        flex: 0 0 auto;
+        cursor: pointer;
+      }
+      .pill-label input[type="checkbox"] {
+        display: none;
+      }
+      .pill-text {
+        display: inline-block;
+        padding: 6px 12px;
+        background: white;
+        border: 2px solid #ffb6c1;
+        border-radius: 20px;
+        color: #555;
+        font-size: 0.9em;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+      .pill-label input[type="checkbox"]:checked + .pill-text {
+        background: #ffb6c1;
+        color: white;
+      }
+
+      /* 上に戻るボタン */
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #ffb6c1;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+        cursor: pointer;
+        z-index: 1000;
+        text-decoration: none;
+        font-weight: bold;
       }
     </style>
   </head>
@@ -148,228 +190,175 @@
     <header>
       <a href="../../index.html" class="site-logo">≠ME Fan Portal</a>
     </header>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-    <nav class="nav-menu" id="nav-menu">
-      <a href="../../index.html">🏠 トップページ</a>
-      <a href="../../lyrics.html">🎤 歌割り集</a>
-      <a href="../../call.html">📣 コール集 (準備中)</a>
-      <a href="schedule.html">📅 スケジュール</a>
-    </nav>
-
     <div class="page-content">
-      <h1>📅 スケジュール帳</h1>
+      <h1>≠ME スケジュール</h1>
+      <button class="jump-btn" onclick="jumpToToday()">
+        📍 今日の予定までジャンプ
+      </button>
 
       <div class="filter-area">
-        <select
-          id="year-filter"
-          onchange="
-            updateMonthFilter();
-            filterEvents();
-          "
-        >
-          <option value="all">すべての年</option>
-        </select>
-        <select id="month-filter" onchange="filterEvents()">
-          <option value="all">すべての月</option>
-        </select>
-        <select id="cat-filter" onchange="filterEvents()">
-          <option value="all">すべてのカテゴリ</option>
-        </select>
+        <div class="filter-section">
+          <span class="filter-label"
+            >▼ 年で絞り込み
+            <button class="clear-btn" onclick="clearFilter('year')">
+              全解除
+            </button></span
+          >
+          <div id="year-filters" class="pill-group"></div>
+        </div>
+        <p></p>
+        <div class="filter-section">
+          <span class="filter-label"
+            >▼ 月で絞り込み
+            <button class="clear-btn" onclick="clearFilter('month')">
+              全解除
+            </button></span
+          >
+          <div id="month-filters" class="pill-group"></div>
+        </div>
+        <p></p>
+        <div class="filter-section">
+          <span class="filter-label"
+            >▼ カテゴリで絞り込み
+            <button class="clear-btn" onclick="clearFilter('category')">
+              全解除
+            </button></span
+          >
+          <div id="cat-filters" class="pill-group"></div>
+        </div>
       </div>
 
       <button class="download-all-btn" onclick="downloadAllIcs()">
-        📥 表示中の予定をカレンダーに一括登録 (.ics)
+        📥 絞り込んだ予定を一括登録 (.ics)
       </button>
-
       <div id="loading">スケジュールを読み込み中...⏳</div>
       <ul class="schedule-list" id="schedule-list"></ul>
     </div>
 
+    <a href="#top" class="back-to-top">↑</a>
+
     <script>
-      function toggleMenu() {
-        document.getElementById("hamburger").classList.toggle("active");
-        document.getElementById("nav-menu").classList.toggle("active");
+      let allEvents = [],
+        currentFilteredEvents = [];
+
+      function jumpToToday() {
+        const todayStr = new Date()
+          .toISOString()
+          .split("T")[0]
+          .replace(/-/g, "/");
+        const items = document.querySelectorAll(".schedule-item");
+        for (let item of items) {
+          const dateText = item.querySelector(".schedule-date").textContent;
+          if (dateText >= todayStr) {
+            item.scrollIntoView({ behavior: "smooth", block: "center" });
+            item.style.border = "3px solid #ff6b81";
+            setTimeout(() => {
+              item.style.border = "";
+            }, 2000);
+            break;
+          }
+        }
       }
 
-      let allEvents = [];
-      let currentFilteredEvents = []; // ★現在画面に表示されている予定を記憶する箱
+      function clearFilter(name) {
+        document
+          .querySelectorAll(`input[name="${name}"]`)
+          .forEach((cb) => (cb.checked = false));
+        filterEvents();
+      }
 
       async function loadSchedule() {
         try {
           const response = await fetch("data.json");
-          if (!response.ok) throw new Error("データが見つかりません。");
           allEvents = await response.json();
-
-          const years = new Set();
-          const categories = new Set();
-          allEvents.forEach((event) => {
-            const year = event.yearMonth.split("/")[0];
-            years.add(year);
-            categories.add(event.category);
+          const years = new Set(),
+            months = new Set(),
+            cats = new Set();
+          allEvents.forEach((e) => {
+            const [y, m] = e.yearMonth.split("/");
+            years.add(y);
+            months.add(m);
+            if (e.category && e.category !== "情報なし") cats.add(e.category);
           });
 
-          const yearFilter = document.getElementById("year-filter");
-          Array.from(years)
-            .sort()
-            .forEach((year) => {
-              const option = document.createElement("option");
-              option.value = year;
-              option.textContent = year + "年";
-              yearFilter.appendChild(option);
+          const createPills = (id, name, values, suffix) => {
+            const container = document.getElementById(id);
+            values.sort().forEach((v) => {
+              const label = document.createElement("label");
+              label.className = "pill-label";
+              let display =
+                name === "year" || name === "month"
+                  ? parseInt(v, 10) + suffix
+                  : v;
+              label.innerHTML = `<input type="checkbox" name="${name}" value="${v}" onchange="filterEvents()">
+                                 <span class="pill-text">${display}</span>`;
+              container.appendChild(label);
             });
+          };
 
-          const catFilter = document.getElementById("cat-filter");
-          categories.forEach((cat) => {
-            if (cat !== "情報なし") {
-              const option = document.createElement("option");
-              option.value = cat;
-              option.textContent = cat;
-              catFilter.appendChild(option);
-            }
-          });
-
-          updateMonthFilter();
+          createPills("year-filters", "year", Array.from(years), "年");
+          createPills("month-filters", "month", Array.from(months), "月");
+          createPills("cat-filters", "category", Array.from(cats), "");
           filterEvents();
-        } catch (error) {
-          document.getElementById("loading").innerText =
-            "エラー😢: " + error.message;
+          document.getElementById("loading").style.display = "none";
+        } catch (e) {
+          document.getElementById("loading").innerText = "エラー: " + e.message;
         }
-      }
-
-      function updateMonthFilter() {
-        const selectedYear = document.getElementById("year-filter").value;
-        const monthFilter = document.getElementById("month-filter");
-        monthFilter.innerHTML = '<option value="all">すべての月</option>';
-
-        const monthsInYear = new Set();
-        allEvents.forEach((event) => {
-          const year = event.yearMonth.split("/")[0];
-          if (selectedYear === "all" || year === selectedYear) {
-            monthsInYear.add(event.yearMonth);
-          }
-        });
-
-        Array.from(monthsInYear)
-          .sort()
-          .forEach((yearMonth) => {
-            const option = document.createElement("option");
-            option.value = yearMonth;
-            option.textContent = yearMonth.replace("/", "年") + "月";
-            monthFilter.appendChild(option);
-          });
       }
 
       function filterEvents() {
-        const selectedYear = document.getElementById("year-filter").value;
-        const selectedMonth = document.getElementById("month-filter").value;
-        const selectedCat = document.getElementById("cat-filter").value;
-        const scheduleList = document.getElementById("schedule-list");
-        scheduleList.innerHTML = "";
+        const getVals = (name) =>
+          Array.from(
+            document.querySelectorAll(`input[name="${name}"]:checked`),
+          ).map((cb) => cb.value);
+        const y = getVals("year"),
+          m = getVals("month"),
+          c = getVals("category");
+        const today = new Date();
+        const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
 
-        // ★絞り込んだ結果を currentFilteredEvents に保存する
-        currentFilteredEvents = allEvents.filter((event) => {
-          const eventYear = event.yearMonth.split("/")[0];
-          const matchYear =
-            selectedYear === "all" || eventYear === selectedYear;
-          const matchMonth =
-            selectedMonth === "all" || event.yearMonth === selectedMonth;
-          const matchCat =
-            selectedCat === "all" || event.category === selectedCat;
-          return matchYear && matchMonth && matchCat;
+        currentFilteredEvents = allEvents.filter((e) => {
+          const [ey, em] = e.yearMonth.split("/");
+          return (
+            (y.length === 0 || y.includes(ey)) &&
+            (m.length === 0 || m.includes(em)) &&
+            (c.length === 0 || c.includes(e.category))
+          );
         });
 
-        currentFilteredEvents.forEach((event) => {
+        const list = document.getElementById("schedule-list");
+        list.innerHTML = "";
+        currentFilteredEvents.forEach((e) => {
           const li = document.createElement("li");
-          li.className = "schedule-item";
-
-          const titleHtml = event.url
-            ? `<a href="${event.url}" target="_blank" rel="noopener noreferrer">${event.title} 🔗</a>`
-            : event.title;
-
-          const dateParts = event.date.split("/");
-          const startDate = dateParts.join("");
-          const endDateObj = new Date(
-            dateParts[0],
-            dateParts[1] - 1,
-            dateParts[2],
-          );
-          endDateObj.setDate(endDateObj.getDate() + 1);
-          const endDate = `${endDateObj.getFullYear()}${String(endDateObj.getMonth() + 1).padStart(2, "0")}${String(endDateObj.getDate()).padStart(2, "0")}`;
-
-          const eventTitle = encodeURIComponent(
-            `[${event.category}] ${event.title}`,
-          );
-          const eventDetails = encodeURIComponent(
-            `詳細はこちら: ${event.url || "URLなし"}`,
-          );
-          const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${startDate}/${endDate}&details=${eventDetails}`;
-
-          li.innerHTML = `
-            <div class="schedule-date">${event.date}</div>
-            <div class="schedule-cat">${event.category}</div>
-            <div class="schedule-title">${titleHtml}</div>
-            <a href="${gCalUrl}" target="_blank" class="gcal-btn">📅 個別追加</a>
-          `;
-          scheduleList.appendChild(li);
+          const [dY, dM, dD] = e.date.split("/").map(Number);
+          const evDate = new Date(dY, dM - 1, dD);
+          li.className =
+            evDate >= today && evDate <= nextWeek
+              ? "schedule-item is-soon"
+              : "schedule-item";
+          li.innerHTML = `<div class="schedule-date">${e.date} ${evDate >= today && evDate <= nextWeek ? '<span class="soon-label">まもなく！</span>' : ""}</div>
+                          <div class="schedule-cat">${e.category}</div>
+                          <div class="schedule-title">${e.url ? `<a href="${e.url}" target="_blank">${e.title}</a>` : e.title}</div>`;
+          list.appendChild(li);
         });
-
-        const loading = document.getElementById("loading");
-        if (currentFilteredEvents.length === 0) {
-          loading.innerText = "条件に合う予定がありません💡";
-          loading.style.display = "block";
-        } else {
-          loading.style.display = "none";
-        }
       }
 
-      // ★第4の魔法：ブラウザ上で直接「一括登録ファイル」を作り出してダウンロードさせる関数！
       function downloadAllIcs() {
-        if (currentFilteredEvents.length === 0) {
-          alert("ダウンロードする予定がありません！");
-          return;
-        }
-
-        // iCalendar形式のテキストを組み立てる
-        let icsContent =
+        if (currentFilteredEvents.length === 0)
+          return alert("予定がありません！");
+        let ics =
           "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//NoimeFanPortal//JP\n";
-
-        currentFilteredEvents.forEach((event) => {
-          const dateParts = event.date.split("/");
-          const startDate = `${dateParts[0]}${dateParts[1]}${dateParts[2]}`;
-
-          // 終日イベントなので翌日を終了日にする
-          const endDateObj = new Date(
-            dateParts[0],
-            dateParts[1] - 1,
-            dateParts[2],
-          );
-          endDateObj.setDate(endDateObj.getDate() + 1);
-          const endDate = `${endDateObj.getFullYear()}${String(endDateObj.getMonth() + 1).padStart(2, "0")}${String(endDateObj.getDate()).padStart(2, "0")}`;
-
-          icsContent += "BEGIN:VEVENT\n";
-          icsContent += `DTSTART;VALUE=DATE:${startDate}\n`;
-          icsContent += `DTEND;VALUE=DATE:${endDate}\n`;
-          icsContent += `SUMMARY:[${event.category}] ${event.title}\n`;
-          icsContent += `DESCRIPTION:詳細はこちら: ${event.url || "URLなし"}\n`;
-          icsContent += "END:VEVENT\n";
+        currentFilteredEvents.forEach((e) => {
+          const d = e.date.split("/");
+          ics += `BEGIN:VEVENT\nDTSTART;VALUE=DATE:${d.join("")}\nSUMMARY:[${e.category}] ${e.title}\nEND:VEVENT\n`;
         });
-
-        icsContent += "END:VCALENDAR";
-
-        // 組み立てたテキストを「ファイル」に変換して、強制的にダウンロードさせる
-        const blob = new Blob([icsContent], {
-          type: "text/calendar;charset=utf-8",
-        });
+        ics += "END:VCALENDAR";
+        const blob = new Blob([ics], { type: "text/calendar" });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.download = "noime_schedule_filtered.ics";
-        document.body.appendChild(link);
+        link.download = "schedule.ics";
         link.click();
-        document.body.removeChild(link);
       }
-
       window.onload = loadSchedule;
     </script>
   </body>
