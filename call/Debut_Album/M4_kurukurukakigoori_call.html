@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Debut Album：M4. クルクルかき氷</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+  </head>
+  <body id="top">
+    <header>
+      <a href="../../index.html" class="site-logo">≠ME Fan Portal</a>
+    </header>
+
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="nav-menu" id="nav-menu">
+      <a href="../../index.html">🏠 トップページ</a>
+      <a href="../../lyrics.html">🎤 歌割り集</a>
+      <a href="../../calls.html">📣 コール集 (準備中)</a>
+    </nav>
+
+    <div class="page-content">
+      <a href="../../lyrics.html" class="back-link">← 歌割り集に戻る</a>
+
+      <h1>クルクルかき氷</h1>
+
+      <div class="song-info">
+        <span class="nanaka">冨田 菜々風</span> センター曲
+      </div>
+
+      <div class="song-info">
+        作曲・編曲：HaggyRock　作詞：指原莉乃<br />
+        <a
+          href="https://youtu.be/zEJD7K1-IZM?si=VAwiztJ-WhLAczQ6"
+          target="_blank"
+          >🎬 YouTubeでMVを見る</a
+        >
+      </div>
+
+      <!-- 1ブロック目（1番など） -->
+      <table class="lyric-table">
+        <tr>
+          <td>特急 各駅 乗り換えちゃって</td>
+          <td><span class="nanaka">ななか</span></td>
+        </tr>
+        <tr>
+          <td>（ちゃって）</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>やっと見えた 海が綺麗</td>
+          <td></td>
+        </tr>
+
+        <!-- 段落の間の空白行 -->
+        <tr class="spacer">
+          <td colspan="2"></td>
+        </tr>
+
+        <tr>
+          <td>【次の段落の歌詞】</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 2ブロック目が必要な場合は、上の <table class="lyric-table">...</table> を丸ごとコピーしてここに貼り付けます -->
+
+    <a href="#top" class="back-to-top">↑ トップへ戻る</a>
+    <script>
+      function toggleMenu() {
+        // ハンバーガーボタンとメニューに 'active' という状態を付け外しする
+        document.getElementById("hamburger").classList.toggle("active");
+        document.getElementById("nav-menu").classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>

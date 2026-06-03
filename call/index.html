@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>≠ME Fan Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="site-logo">≠ME Fan Portal</a>
+    </header>
+
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="nav-menu" id="nav-menu">
+      <a href="lyrics.html">🎤 歌割り集（準備中）</a>
+      <a href="call.html">📣 コール集 (準備中)</a>
+      <a href="get_schedule/schedule.html">📅 スケジュール</a>
+    </nav>
+
+    <div class="main-content">
+      <h1 class="hero-title">ノイミーの<br />すべてをここに。</h1>
+
+      <div class="menu-cards">
+        <a href="lyrics.html" class="card lyrics">
+          <h2>歌割り集</h2>
+          <p>
+            全楽曲の歌割りとパート分け<br />（推しメンのパートをチェック！）
+          </p>
+        </a>
+
+        <a href="call.html" class="card calls">
+          <h2>コール集</h2>
+          <p>ライブで盛り上がる！<br />楽曲ごとのコールまとめ</p>
+        </a>
+
+        <a href="get_schedule/schedule.html" class="card schedules">
+          <h2>スケジュール</h2>
+          <p>≠MEのスケジュールがここに！</p>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        // ハンバーガーボタンとメニューに 'active' という状態を付け外しする
+        document.getElementById("hamburger").classList.toggle("active");
+        document.getElementById("nav-menu").classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>
