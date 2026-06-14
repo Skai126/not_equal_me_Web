@@ -520,3 +520,102 @@ li a:hover {
   color: blue;
   font-weight: bold;
 }
+
+/* ================================================= */
+/* 11. スケジュールページ専用（schedule-list）       */
+/* ================================================= */
+
+/* リスト全体の余白と間隔を調整 */
+.schedule-list {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* カード同士の隙間 */
+  margin-top: 30px;
+}
+
+/* 1つ1つの予定（カード）のデザイン */
+.schedule-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-left: 6px solid #00dca0; /* 左側にミントグリーンのアクセント */
+}
+
+.schedule-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 220, 160, 0.15);
+}
+
+/* 1週間以内の予定（まもなく！）の特別デザイン */
+.schedule-item.is-soon {
+  border-left: 6px solid #ffb6c1; /* ピンクのアクセントに変更 */
+  background-color: #fffafb; /* ほんのりピンク背景 */
+}
+
+/* 日付の文字サイズと色 */
+.schedule-date {
+  font-weight: bold;
+  color: #777;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+/* まもなく！ラベルのデザイン */
+.soon-label {
+  display: inline-block;
+  background-color: #ffb6c1;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8em;
+  margin-left: 10px;
+  animation: pulse 2s infinite; /* 少し目立たせるアニメーション */
+}
+
+/* カテゴリタグのデザイン */
+.schedule-cat {
+  display: inline-block;
+  background-color: #f2faf8;
+  color: #00dca0;
+  border: 1px solid #00dca0;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* タイトルとリンクのデザイン */
+.schedule-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.schedule-title a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.schedule-title a:hover {
+  color: #00dca0;
+  text-decoration: underline;
+}
+
+/* アニメーションの定義 */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
