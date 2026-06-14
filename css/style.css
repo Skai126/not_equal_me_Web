@@ -522,78 +522,132 @@ li a:hover {
 }
 
 /* ================================================= */
-/* 11. スケジュールページ専用（schedule-list）       */
+/* 11. スケジュールページ専用（マシュマロフロート風） */
 /* ================================================= */
 
-/* リスト全体の余白と間隔を調整 */
+/* リスト全体の余白と間隔（少し広めにする） */
 .schedule-list {
   list-style-type: none;
   padding-left: 0;
   display: flex;
   flex-direction: column;
-  gap: 15px; /* カード同士の隙間 */
+  gap: 25px; /* カード同士の隙間を広げてふわふわ感を出す */
   margin-top: 30px;
 }
 
-/* 1つ1つの予定（カード）のデザイン */
+/* 1つ1つの予定（カード）のデザイン：マシュマロフロート風 */
 .schedule-item {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  border-left: 6px solid #00dca0; /* 左側にミントグリーンのアクセント */
+  /* 本物のマシュマロのような、渦巻くパステルカラーのグラデーション背景 */
+  background: linear-gradient(
+    135deg,
+    #fffafb 0%,
+    #e0f7fa 30%,
+    #fff3e0 60%,
+    #f3e5f5 100%
+  );
+  background-size: 200% 200%;
+  animation: marshmallow-gradient 10s ease infinite; /* ゆっくり動かす */
+
+  /* 角を非常に丸くし、形を少し不規則にしてふわふわ感を出す */
+  border-radius: 40px 15px 40px 15px;
+  padding: 25px;
+
+  /* 影を広く、薄くして、浮いているような演出 */
+  box-shadow: 0 10px 25px rgba(0, 220, 160, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* 左側のアクセント線を「泡」のようなデザインに */
+  position: relative;
+  overflow: hidden;
+  border-left: none; /* 元の線は消す */
 }
 
+/* カードの左端に小さな泡（バブル）を追加 */
+.schedule-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background:
+    radial-gradient(circle, #ffb6c1 20%, transparent 20%),
+    radial-gradient(circle, #00dca0 20%, transparent 20%);
+  background-size: 10px 10px;
+  background-position:
+    0 0,
+    5px 5px;
+  opacity: 0.5;
+}
+
+/* ホバー時の動きをより大きく、ふわっとさせる */
 .schedule-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 220, 160, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 220, 160, 0.15);
 }
 
-/* 1週間以内の予定（まもなく！）の特別デザイン */
+/* 1週間以内の予定（まもなく！）の特別デザイン：イチゴマシュマロ風 */
 .schedule-item.is-soon {
-  border-left: 6px solid #ffb6c1; /* ピンクのアクセントに変更 */
-  background-color: #fffafb; /* ほんのりピンク背景 */
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe0e9 50%, #fffafb 100%);
+  border: 2px dashed #ffb6c1; /* ピンクの点線枠 */
 }
 
-/* 日付の文字サイズと色 */
+.schedule-item.is-soon::before {
+  background:
+    radial-gradient(circle, #ffb6c1 20%, transparent 20%),
+    radial-gradient(circle, #ffffff 20%, transparent 20%);
+  background-size: 10px 10px;
+  opacity: 0.8;
+}
+
+/* 日付のデザイン */
 .schedule-date {
   font-weight: bold;
-  color: #777;
+  color: #888;
   font-size: 0.9em;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
 }
 
-/* まもなく！ラベルのデザイン */
+/* まもなく！ラベルのデザイン：羽の生えたマシュマロ */
 .soon-label {
   display: inline-block;
   background-color: #ffb6c1;
   color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.8em;
-  margin-left: 10px;
-  animation: pulse 2s infinite; /* 少し目立たせるアニメーション */
-}
-
-/* カテゴリタグのデザイン */
-.schedule-cat {
-  display: inline-block;
-  background-color: #f2faf8;
-  color: #00dca0;
-  border: 1px solid #00dca0;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.8em;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-left: 10px;
+  position: relative;
+  /* 羽のような小さな丸を追加 */
+  box-shadow:
+    -5px 0 0 -2px #ffb6c1,
+    5px 0 0 -2px #ffb6c1;
+  animation: marshmallow-float 3s ease-in-out infinite; /* ぷかぷか浮かせる */
+}
+
+/* カテゴリタグのデザイン：雲のような形 */
+.schedule-cat {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #00dca0;
+  border: 2px solid #00dca0;
+  padding: 5px 15px;
+  border-radius: 15px 15px 0 15px; /* 雲のような不規則な丸 */
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 0 rgba(0, 220, 160, 0.1);
 }
 
 /* タイトルとリンクのデザイン */
 .schedule-title {
-  font-size: 1.1em;
+  font-size: 1.15em;
   font-weight: bold;
   color: #333;
+  /* 少し文字を丸く見せるフォント設定（もしあれば） */
 }
 
 .schedule-title a {
@@ -607,15 +661,30 @@ li a:hover {
   text-decoration: underline;
 }
 
-/* アニメーションの定義 */
-@keyframes pulse {
+/* ================================================= */
+/* アニメーション定義                                 */
+/* ================================================= */
+
+/* 背景グラデーションをゆっくり動かす */
+@keyframes marshmallow-gradient {
   0% {
-    opacity: 1;
+    background-position: 0% 50%;
   }
   50% {
-    opacity: 0.7;
+    background-position: 100% 50%;
   }
   100% {
-    opacity: 1;
+    background-position: 0% 50%;
+  }
+}
+
+/* ラベルをぷかぷか浮かせる */
+@keyframes marshmallow-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
   }
 }
