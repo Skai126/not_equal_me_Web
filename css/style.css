@@ -8,13 +8,11 @@ body {
     "Hiragino Maru Gothic ProN", "Rounded M+ 1c", "Quicksand", sans-serif;
   line-height: 1.6;
   margin: 0;
-  /* ★修正：一番上にヘッダー分の100pxの余白を強制的に作ります */
   padding: 100px 20px 40px;
   color: #555;
   background-color: #f2faf8;
 }
 
-/* ★修正：bodyに余白を作ったので、ここは幅の制限だけにスッキリさせます */
 .page-content,
 .main-content {
   max-width: 800px;
@@ -47,9 +45,6 @@ header {
   border: 2px dashed #00dca0;
   padding: 5px 15px;
   border-radius: 20px;
-  display: inline-block;
-  font-family:
-    "Hiragino Maru Gothic ProN", "Rounded M+ 1c", "Quicksand", sans-serif;
 }
 
 .hamburger {
@@ -164,7 +159,6 @@ h1 {
   margin-top: 0;
 }
 
-/* index.html用の特別タイトル上書き */
 .hero-title {
   background: none;
   border: none;
@@ -183,26 +177,6 @@ h2 {
   font-size: 1.2em;
   padding: 0;
   overflow: hidden;
-}
-
-h2 a {
-  display: block;
-  padding: 12px 20px;
-  color: #333;
-  text-decoration: none;
-  transition: 0.3s;
-}
-h2 a:hover {
-  background-color: #fffafb;
-  color: #ffb6c1;
-}
-h2 a::after {
-  content: "🔗Music";
-  float: right;
-  font-size: 0.7em;
-  color: #aaa;
-  font-weight: normal;
-  margin-top: 5px;
 }
 
 /* ================================================= */
@@ -251,9 +225,154 @@ h2 a::after {
 .card.calls h2 {
   color: #ffb6c1;
 }
+.card.schedules {
+  background-color: #e0f7fa;
+  border-left: 8px solid #00dca0;
+}
 
 /* ================================================= */
-/* 6. 歌割り一覧ページ専用（曲名リスト）             */
+/* 6. 歌割りホーム：作品カード（ジャケ写付き）       */
+/* ================================================= */
+.releases-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* スマホで綺麗に並ぶサイズ */
+  margin-top: 30px;
+}
+
+.release-card {
+  background-color: #ffffff;
+  border: 2px solid rgba(0, 220, 160, 0.2); /* ミントグリーンの薄い枠線 */
+  border-radius: 20px; /* 他の要素に合わせて丸く */
+  padding: 0 0 16px 0; /* 下側だけ余白を空ける */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  transform: translateZ(0); /* Safariの角丸バグ対策 */
+  box-shadow: 0 4px 15px rgba(0, 220, 160, 0.05);
+}
+
+.release-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 220, 160, 0.15);
+  border-color: #00dca0;
+}
+
+.card-jacket {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  box-sizing: border-box;
+  border-bottom: 2px solid rgba(0, 220, 160, 0.1);
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1em;
+  color: #555;
+  margin-top: 15px;
+  padding: 0 15px;
+  line-height: 1.4;
+}
+
+/* モーダルに渡す用なので普段は消しておく */
+.release-data {
+  display: none;
+}
+
+/* ================================================= */
+/* 7. ハーフモーダル（画面下から出るUI）             */
+/* ================================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒背景 */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 2000; /* ハンバーガーメニュー(1000)より上に表示する */
+}
+
+.half-modal {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 85vh;
+  background-color: #f2faf8; /* サイト全体の背景色に合わせる */
+  border-radius: 24px 24px 0 0; /* 上だけ丸く */
+  padding: 30px 20px 40px;
+  box-sizing: border-box;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow-y: auto;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-overlay.is-open .half-modal {
+  transform: translateY(0);
+}
+
+/* モーダル内のタイトル（元の h2 の装飾を上書き） */
+#modal-content-area h2 {
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #00dca0;
+}
+
+/* モーダル内の Apple Music リンク装飾 */
+#modal-content-area p a {
+  display: block;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #ffb6c1;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* 閉じるボタン */
+.close-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-top: 30px;
+  background-color: #ffb6c1;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(255, 182, 193, 0.4);
+  transition: 0.3s;
+}
+.close-btn:hover {
+  background-color: #ff9eb3;
+  transform: translateY(-2px);
+}
+
+/* ================================================= */
+/* 8. 共通のリスト装飾（モーダル内の曲目にも適用）   */
 /* ================================================= */
 ul {
   list-style-type: none;
@@ -292,7 +411,7 @@ li a:hover {
 }
 
 /* ================================================= */
-/* 7. 楽曲ページ専用（歌割りの表・曲情報）           */
+/* 9. 楽曲ページ専用（歌割りの表・曲情報）           */
 /* ================================================= */
 .song-info {
   text-align: center;
@@ -341,7 +460,7 @@ li a:hover {
 }
 
 /* ================================================= */
-/* 8. メンバーカラー設定                             */
+/* 10. メンバーカラー設定                            */
 /* ================================================= */
 .hanyatan {
   color: #67a7cc;
@@ -389,236 +508,4 @@ li a:hover {
 .shiorin {
   color: blue;
   font-weight: bold;
-}
-
-/* ================================================= */
-/* 9. スケジュールページ専用（統合版）                */
-/* ================================================= */
-.schedule-list {
-  list-style: none;
-  padding: 0;
-}
-
-.schedule-item {
-  background: #ffffff;
-  margin-bottom: 15px;
-  padding: 18px;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
-  display: flex;
-  align-items: center;
-  border-left: 6px solid #ffb6c1;
-  flex-wrap: wrap;
-  transition: transform 0.2s;
-}
-.schedule-item.is-soon {
-  border: 2px solid #ffb6c1;
-  background: #fffafa;
-}
-.soon-label {
-  color: #ff6b81;
-  font-size: 0.7em;
-  font-weight: bold;
-  background: white;
-  padding: 2px 6px;
-  border-radius: 5px;
-  border: 1px solid #ff6b81;
-  margin-left: 8px;
-}
-.schedule-date {
-  font-weight: bold;
-  color: #ffb6c1;
-  font-size: 1.1em;
-  margin-right: 15px;
-  white-space: nowrap;
-}
-.schedule-cat {
-  background: #00dca0;
-  color: white;
-  font-size: 0.75em;
-  font-weight: bold;
-  padding: 3px 12px;
-  border-radius: 50px;
-  margin-right: 15px;
-}
-.schedule-title {
-  color: #555;
-  font-weight: bold;
-  line-height: 1.4;
-  flex-grow: 1;
-}
-.schedule-title a {
-  color: #ff6b81;
-  text-decoration: none;
-}
-.schedule-title a:hover {
-  text-decoration: underline;
-}
-
-.download-all-btn {
-  display: block;
-  background: #ff6b81;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1.1em;
-  font-weight: bold;
-  padding: 15px 30px;
-  border-radius: 50px;
-  margin: 20px auto;
-  cursor: pointer;
-  border: none;
-  width: 100%;
-  max-width: 400px;
-  transition: 0.3s;
-  box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
-}
-.download-all-btn:hover {
-  background: #ff8fa3;
-  transform: translateY(-3px);
-}
-
-.jump-btn {
-  display: block;
-  margin: 10px auto;
-  background: #fff;
-  border: 2px solid #ffb6c1;
-  color: #ffb6c1;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.filter-area {
-  background: #fff0f5;
-  padding: 20px;
-  border-radius: 30px;
-  margin-bottom: 25px;
-}
-.filter-label {
-  font-weight: bold;
-  color: #ff6b81;
-  font-size: 0.9em;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.clear-btn {
-  font-size: 0.7em;
-  cursor: pointer;
-  background: #fff;
-  border: 1px solid #ff6b81;
-  border-radius: 10px;
-  color: #ff6b81;
-  padding: 2px 8px;
-}
-.pill-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 5px;
-}
-.pill-label {
-  flex: 0 0 auto;
-  cursor: pointer;
-}
-.pill-label input[type="checkbox"] {
-  display: none;
-}
-.pill-text {
-  display: inline-block;
-  padding: 6px 12px;
-  background: white;
-  border: 2px solid #ffb6c1;
-  border-radius: 20px;
-  color: #555;
-  font-size: 0.9em;
-  font-weight: bold;
-  transition: 0.2s;
-}
-.pill-label input[type="checkbox"]:checked + .pill-text {
-  background: #ffb6c1;
-  color: white;
-}
-
-.releases-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  margin-top: 20px;
-}
-
-/* ジャケ写の代わりになるクリック可能なカード */
-.release-card {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 24px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.release-card:hover {
-  background-color: #e9ecef;
-}
-
-.card-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: #333;
-}
-
-/* モーダルの背景（暗くなる部分） */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-  z-index: 1000;
-}
-
-/* ハーフモーダル本体（下から上がってくる部分） */
-.half-modal {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  max-height: 80vh; /* 画面の高さの80%まで */
-  background-color: #fff;
-  border-radius: 20px 20px 0 0; /* 上の角だけ丸くする */
-  padding: 20px;
-  transform: translateY(100%); /* 最初は画面の下に隠す */
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  overflow-y: auto; /* 中身が多い場合はスクロール可能に */
-}
-
-/* クラスが付与されたとき（開いたとき）のスタイル */
-.modal-overlay.is-open {
-  opacity: 1;
-  visibility: visible;
-}
-.modal-overlay.is-open .half-modal {
-  transform: translateY(0); /* 元の位置（画面下部）に戻す */
-}
-
-/* モーダル内の閉じるボタン */
-.close-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin-top: 20px;
-  background-color: #f1f1f1;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
 }
