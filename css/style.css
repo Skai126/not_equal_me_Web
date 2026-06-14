@@ -541,3 +541,84 @@ li a:hover {
   background: #ffb6c1;
   color: white;
 }
+
+.releases-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  margin-top: 20px;
+}
+
+/* ジャケ写の代わりになるクリック可能なカード */
+.release-card {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.release-card:hover {
+  background-color: #e9ecef;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* モーダルの背景（暗くなる部分） */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 1000;
+}
+
+/* ハーフモーダル本体（下から上がってくる部分） */
+.half-modal {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 80vh; /* 画面の高さの80%まで */
+  background-color: #fff;
+  border-radius: 20px 20px 0 0; /* 上の角だけ丸くする */
+  padding: 20px;
+  transform: translateY(100%); /* 最初は画面の下に隠す */
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow-y: auto; /* 中身が多い場合はスクロール可能に */
+}
+
+/* クラスが付与されたとき（開いたとき）のスタイル */
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-overlay.is-open .half-modal {
+  transform: translateY(0); /* 元の位置（画面下部）に戻す */
+}
+
+/* モーダル内の閉じるボタン */
+.close-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
