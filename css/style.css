@@ -268,7 +268,14 @@ h1 {
   text-align: center;
   color: var(--primary-dark);
   background:
-    linear-gradient(90deg, var(--primary), var(--accent-pink), var(--accent-yellow), var(--accent-blue)) top / 100% 4px no-repeat,
+    linear-gradient(
+        90deg,
+        var(--primary),
+        var(--accent-pink),
+        var(--accent-yellow),
+        var(--accent-blue)
+      )
+      top / 100% 4px no-repeat,
     linear-gradient(135deg, var(--bg-white) 0%, rgba(0, 201, 151, 0.05) 100%);
   padding: 25px;
   border-radius: var(--radius);
@@ -279,8 +286,12 @@ h1 {
 }
 
 .hero-title {
-  background:
-    linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent-pink));
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark),
+    var(--primary),
+    var(--accent-pink)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   border: none;
@@ -851,8 +862,12 @@ li a:hover {
 }
 
 .song-header {
-  background:
-    linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent-pink));
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark),
+    var(--primary),
+    var(--accent-pink)
+  );
   color: white;
   padding: 15px 20px;
   font-size: 1.18em;
