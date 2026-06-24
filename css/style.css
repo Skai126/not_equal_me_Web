@@ -721,7 +721,7 @@ li a:hover {
 .hanyatan {
   color: var(--color-hanyatan);
   font-weight: 700;
-  background: rgba(103, 167, 204, 0.08);
+  background: rgba(57, 170, 236, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -729,7 +729,7 @@ li a:hover {
 .kirarin {
   color: var(--color-kirarin);
   font-weight: 700;
-  background: rgba(230, 194, 0, 0.08);
+  background: rgba(255, 217, 1, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -737,7 +737,7 @@ li a:hover {
 .moeko {
   color: var(--color-moeko);
   font-weight: 700;
-  background: rgba(233, 30, 30, 0.08);
+  background: rgba(255, 0, 0, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -745,7 +745,7 @@ li a:hover {
 .nacchan {
   color: var(--color-nacchan);
   font-weight: 700;
-  background: rgba(251, 177, 97, 0.08);
+  background: rgba(255, 132, 0, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -753,7 +753,7 @@ li a:hover {
 .natsumin {
   color: var(--color-natsumin);
   font-weight: 700;
-  background: rgba(138, 71, 137, 0.08);
+  background: rgba(0, 0, 0, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -761,7 +761,7 @@ li a:hover {
 .momokyun {
   color: var(--color-momokyun);
   font-weight: 700;
-  background: rgba(240, 145, 153, 0.08);
+  background: rgba(255, 51, 167, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -769,7 +769,7 @@ li a:hover {
 .mirei {
   color: var(--color-mirei);
   font-weight: 700;
-  background: rgba(146, 215, 231, 0.08);
+  background: rgba(143, 224, 243, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -777,7 +777,7 @@ li a:hover {
 .hiichan {
   color: var(--color-hiichan);
   font-weight: 700;
-  background: rgba(255, 105, 180, 0.08);
+  background: rgba(252, 123, 187, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -785,7 +785,7 @@ li a:hover {
 .sayayan {
   color: var(--color-sayayan);
   font-weight: 700;
-  background: rgba(196, 199, 179, 0.08);
+  background: rgba(200, 201, 194, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -793,7 +793,7 @@ li a:hover {
 .nanaka {
   color: var(--color-nanaka);
   font-weight: 700;
-  background: rgba(43, 168, 77, 0.08);
+  background: rgba(23, 149, 57, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -809,7 +809,7 @@ li a:hover {
 .shiorin {
   color: var(--color-shiorin);
   font-weight: 700;
-  background: rgba(30, 58, 138, 0.08);
+  background: rgba(5, 61, 213, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
