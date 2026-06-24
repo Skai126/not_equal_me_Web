@@ -15,18 +15,18 @@
   --accent-blue: #67a7cc;
 
   /* Member Colors */
-  --color-hanyatan: #67a7cc; /* Blue */
-  --color-kirarin: #e6c200; /* Gold */
-  --color-moeko: #e91e1e; /* Red */
-  --color-nacchan: #fbb161; /* Orange */
-  --color-natsumin: #8a4789; /* Purple */
-  --color-momokyun: #f09199; /* Rose */
+  --color-hanyatan: #45b4f4; /* Blue */
+  --color-kirarin: #ffd904; /* Yellow */
+  --color-moeko: #ff0000; /* Red */
+  --color-nacchan: #ff8400; /* Orange */
+  --color-natsumin: #000000; /* Black */
+  --color-momokyun: #ff26de; /* Pink */
   --color-mirei: #92d7e7; /* Sky Blue */
-  --color-hiichan: #ff69b4; /* Hot Pink */
-  --color-sayayan: #c4c7b3; /* Beige */
+  --color-hiichan: #fe72cb; /* Hot Pink */
+  --color-sayayan: #bdbfb3; /* Beige */
   --color-nanaka: #2ba84d; /* Deep Green */
   --color-miruten: #8a77b7; /* Lavender */
-  --color-shiorin: #1e3a8a; /* Navy */
+  --color-shiorin: #003bde; /* Navy */
 
   /* Neutrals */
   --bg-light: #f0fdf9; /* Very light emerald tint */
@@ -753,7 +753,7 @@ li a:hover {
 .natsumin {
   color: var(--color-natsumin);
   font-weight: 700;
-  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
