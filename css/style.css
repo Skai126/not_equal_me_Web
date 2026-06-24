@@ -1,6 +1,39 @@
 @charset "UTF-8";
 
 /* ================================================= */
+/* Color Palette: ≠ME Theme */
+/* ================================================= */
+:root {
+  /* Main Colors */
+  --primary: #00dca0; /* Emerald Green */
+  --primary-dark: #00a070; /* Deep Emerald */
+  --primary-light: #33f0b8; /* Light Emerald */
+  --accent-pink: #ffb6c1; /* Pink */
+  --accent-dark: #ff9eb3; /* Dark Pink */
+
+  /* Member Colors */
+  --color-hanyatan: #67a7cc; /* Blue */
+  --color-kirarin: #e6c200; /* Gold */
+  --color-moeko: #e91e1e; /* Red */
+  --color-nacchan: #fbb161; /* Orange */
+  --color-natsumin: #8a4789; /* Purple */
+  --color-momokyun: #f09199; /* Rose */
+  --color-mirei: #92d7e7; /* Sky Blue */
+  --color-hiichan: #ff69b4; /* Hot Pink */
+  --color-sayayan: #c4c7b3; /* Beige */
+  --color-nanaka: #2ba84d; /* Deep Green */
+  --color-miruten: #8a77b7; /* Lavender */
+  --color-shiorin: #1e3a8a; /* Navy */
+
+  /* Neutrals */
+  --bg-light: #f0fdf9; /* Very light emerald tint */
+  --bg-white: #ffffff;
+  --text-dark: #333333;
+  --text-muted: #777777;
+  --border-light: rgba(0, 220, 160, 0.1);
+}
+
+/* ================================================= */
 /* 1. ベース設定（全ページ共通）                     */
 /* ================================================= */
 body {
@@ -9,22 +42,41 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 100px 20px 40px;
-  color: #555;
-  background-color: #f2faf8;
+  color: var(--text-dark);
+  background: linear-gradient(
+    135deg,
+    #f5f9f8 0%,
+    #f0f8f6 50%,
+    #f3faf8 100%
+  );
 }
 
 .page-content,
 .main-content {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ================================================= */
 /* 2. ヘッダー＆ハンバーガーメニュー（全ページ共通） */
 /* ================================================= */
 header {
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 220, 160, 0.1);
+  background: linear-gradient(90deg, var(--bg-white) 0%, #f9fffe 100%);
+  box-shadow:
+    0 4px 15px rgba(0, 220, 160, 0.12),
+    0 2px 5px rgba(0, 0, 0, 0.05);
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
@@ -38,45 +90,58 @@ header {
 }
 
 .site-logo {
-  color: #00dca0;
+  color: var(--primary);
   font-weight: bold;
   font-size: 1.2em;
   text-decoration: none;
-  border: 2px dashed #00dca0;
-  padding: 5px 15px;
-  border-radius: 20px;
+  border: 2px solid var(--primary);
+  padding: 8px 18px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 220, 160, 0.05) 0%,
+    rgba(51, 240, 184, 0.05) 100%
+  );
+}
+
+.site-logo:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 220, 160, 0.1) 0%,
+    rgba(51, 240, 184, 0.1) 100%
+  );
+  box-shadow: 0 4px 10px rgba(0, 220, 160, 0.2);
+  transform: translateY(-2px);
 }
 
 .hamburger {
   position: fixed;
-  top: 22px;
+  top: 18px;
   right: 20px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 6px;
   z-index: 1000;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: var(--primary);
+  font-weight: bold;
+  transition: all 0.3s ease;
+  padding: 5px;
+  transform-origin: center;
 }
 
-.hamburger span {
-  display: block;
-  width: 30px;
-  height: 4px;
-  background-color: #ffb6c1;
-  border-radius: 5px;
-  transition: 0.3s;
+.hamburger:hover {
+  color: var(--accent-pink);
+  transform: scale(1.1) rotate(-5deg);
 }
 
-.hamburger.active span:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
-  background-color: #fff;
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
-  background-color: #fff;
+.hamburger.active {
+  color: var(--accent-pink);
+  transform: scale(1.1) rotate(15deg);
 }
 
 .nav-menu {
@@ -85,8 +150,12 @@ header {
   right: -100%;
   width: 250px;
   height: 100vh;
-  background-color: rgba(0, 220, 160, 0.95);
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    180deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
+  box-shadow: -4px 0 15px rgba(0, 220, 160, 0.3);
   transition: 0.3s ease-in-out;
   z-index: 500;
   padding-top: 80px;
@@ -104,11 +173,14 @@ header {
   padding: 15px 30px;
   font-size: 1.1em;
   font-weight: bold;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
 .nav-menu a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  padding-left: 40px;
+  border-left: 4px solid var(--accent-pink);
 }
 
 /* ================================================= */
@@ -116,16 +188,21 @@ header {
 /* ================================================= */
 .back-link,
 .back-to-top {
-  background-color: #ffb6c1;
+  background: linear-gradient(
+    135deg,
+    var(--accent-pink) 0%,
+    var(--accent-dark) 100%
+  );
   color: white !important;
   text-decoration: none;
-  padding: 8px 15px;
+  padding: 10px 18px;
   border-radius: 50px;
   font-weight: bold;
   display: inline-block;
-  box-shadow: 0 3px 6px rgba(255, 182, 193, 0.4);
-  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+  transition: all 0.3s ease;
   font-size: 0.9em;
+  border: none;
 }
 
 .back-link {
@@ -136,13 +213,13 @@ header {
   bottom: 30px;
   right: 30px;
   z-index: 100;
-  padding: 10px 20px;
+  padding: 12px 22px;
 }
 
 .back-link:hover,
 .back-to-top:hover {
-  background-color: #ff9eb3;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 182, 193, 0.4);
 }
 
 /* ================================================= */
@@ -150,13 +227,18 @@ header {
 /* ================================================= */
 h1 {
   text-align: center;
-  color: #00dca0;
-  background: #ffffff;
-  padding: 20px;
+  color: var(--primary);
+  background: linear-gradient(
+    135deg,
+    var(--bg-white) 0%,
+    rgba(0, 220, 160, 0.03) 100%
+  );
+  padding: 25px;
   border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 220, 160, 0.15);
-  border: 2px dashed #00dca0;
+  box-shadow: 0 5px 18px rgba(0, 220, 160, 0.12);
+  border: 2px solid var(--primary);
   margin-top: 0;
+  font-weight: 800;
 }
 
 .hero-title {
@@ -165,18 +247,29 @@ h1 {
   box-shadow: none;
   padding: 0;
   margin-bottom: 40px;
-  color: #333;
+  color: var(--text-dark);
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
 }
 
 h2 {
-  background-color: #ffffff;
-  border-radius: 50px;
-  border-left: 6px solid #ffb6c1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(
+    135deg,
+    var(--bg-white) 0%,
+    rgba(255, 182, 193, 0.03) 100%
+  );
+  border-radius: 15px;
+  border-left: 6px solid var(--accent-pink);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
   margin-top: 40px;
   font-size: 1.2em;
-  padding: 0;
+  padding: 0 20px;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+h2:hover {
+  border-left-color: var(--primary);
+  box-shadow: 0 4px 14px rgba(0, 220, 160, 0.1);
 }
 
 /* ================================================= */
@@ -184,50 +277,87 @@ h2 {
 /* ================================================= */
 .menu-cards {
   display: grid;
-  gap: 20px;
+  gap: 25px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 40px;
 }
+
 .card {
-  background: white;
-  padding: 30px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #fafcfb 100%);
+  padding: 30px 25px;
   border-radius: 20px;
   text-align: center;
   text-decoration: none;
-  color: #555;
-  box-shadow: 0 4px 15px rgba(0, 220, 160, 0.1);
-  transition: 0.3s;
-  border-bottom: 5px solid #00dca0;
+  color: var(--text-muted);
+  box-shadow: 0 6px 20px rgba(0, 220, 160, 0.12);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--accent-pink),
+    var(--primary)
+  );
+  transition: left 0.3s ease;
+}
+
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 220, 160, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 28px rgba(0, 220, 160, 0.18);
+  border-color: var(--primary);
 }
+
+.card:hover::before {
+  left: 100%;
+}
+
 .card h2 {
-  margin: 0 0 10px 0;
-  color: #00dca0;
+  margin: 0 0 12px 0;
+  color: var(--primary);
   font-size: 1.4em;
   background: none;
   border: none;
   box-shadow: none;
   padding: 0;
 }
+
 .card p {
   margin: 0;
   font-size: 0.9em;
-  color: #777;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
+
 .card.lyrics {
-  border-color: #00dca0;
+  border-bottom: 4px solid var(--primary);
 }
+
 .card.calls {
-  border-color: #ffb6c1;
+  border-bottom: 4px solid var(--accent-pink);
 }
+
 .card.calls h2 {
-  color: #ffb6c1;
+  color: var(--accent-pink);
 }
+
 .card.schedules {
-  background-color: #e0f7fa;
-  border-left: 8px solid #00dca0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 220, 160, 0.05) 0%,
+    rgba(255, 182, 193, 0.03) 100%
+  );
+  border-left: 6px solid var(--primary);
 }
 
 /* ================================================= */
@@ -235,36 +365,51 @@ h2 {
 /* ================================================= */
 .releases-grid {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(200px, 1fr)
-  ); /* スマホで綺麗に並ぶサイズ */
+  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   margin-top: 30px;
 }
 
 .release-card {
-  background-color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #fafcfb 100%);
   border: 2px solid rgba(0, 220, 160, 0.2);
   border-radius: 20px;
-  padding: 0 0 16px 0;
+  padding: 0;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-
-  /* ↓ 念押しの幅指定 */
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   width: 100%;
   box-sizing: border-box;
-
   overflow: hidden;
   transform: translateZ(0);
-  box-shadow: 0 4px 15px rgba(0, 220, 160, 0.05);
+  box-shadow: 0 6px 18px rgba(0, 220, 160, 0.12);
+  position: relative;
+}
+
+.release-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 220, 160, 0.1),
+    rgba(255, 182, 193, 0.1)
+  );
+  pointer-events: none;
+  transition: left 0.4s ease;
 }
 
 .release-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 220, 160, 0.15);
-  border-color: #00dca0;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 220, 160, 0.2);
+  border-color: var(--primary);
+}
+
+.release-card:hover::after {
+  left: 100%;
 }
 
 .card-jacket {
@@ -275,21 +420,23 @@ h2 {
   object-fit: cover;
   display: block;
   box-sizing: border-box;
-
-  /* ↓ 追加：画像自身の上の角を直接丸くする（親の20pxより少し小さい18pxが綺麗にハマります） */
   border-radius: 18px 18px 0 0;
   margin: 0;
   padding: 0;
-
   border-bottom: 2px solid rgba(0, 220, 160, 0.1);
+  transition: transform 0.4s ease;
+}
+
+.release-card:hover .card-jacket {
+  transform: scale(1.05);
 }
 
 .card-title {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1em;
-  color: #555;
+  color: var(--text-dark);
   margin-top: 15px;
-  padding: 0 15px;
+  padding: 0 15px 16px;
   line-height: 1.4;
 }
 
@@ -307,13 +454,18 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒背景 */
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 220, 160, 0.1)
+  );
   opacity: 0;
   visibility: hidden;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
-  z-index: 2000; /* ハンバーガーメニュー(1000)より上に表示する */
+  z-index: 2000;
+  backdrop-filter: blur(2px);
 }
 
 .half-modal {
@@ -322,25 +474,27 @@ h2 {
   left: 0;
   width: 100%;
   max-height: 85vh;
-  background-color: #f2faf8; /* サイト全体の背景色に合わせる */
-  border-radius: 24px 24px 0 0; /* 上だけ丸く */
+  background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
+  border-radius: 24px 24px 0 0;
   padding: 30px 20px 40px;
   box-sizing: border-box;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow-y: auto;
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 -8px 28px rgba(0, 220, 160, 0.15),
+    0 -2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .modal-overlay.is-open {
   opacity: 1;
   visibility: visible;
 }
+
 .modal-overlay.is-open .half-modal {
   transform: translateY(0);
 }
 
-/* モーダル内のタイトル（元の h2 の装飾を上書き） */
 #modal-content-area h2 {
   background: none;
   border: none;
@@ -348,38 +502,49 @@ h2 {
   margin-top: 0;
   margin-bottom: 20px;
   text-align: center;
-  color: #00dca0;
+  color: var(--primary);
+  font-size: 1.3em;
 }
 
-/* モーダル内の Apple Music リンク装飾 */
 #modal-content-area p a {
   display: block;
   text-align: center;
   margin-bottom: 15px;
-  color: #ffb6c1;
+  color: var(--accent-pink);
   font-weight: bold;
   text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 8px 0;
 }
 
-/* 閉じるボタン */
+#modal-content-area p a:hover {
+  color: var(--accent-dark);
+  transform: scale(1.05);
+}
+
 .close-btn {
   display: block;
   width: 100%;
   padding: 15px;
   margin-top: 30px;
-  background-color: #ffb6c1;
+  background: linear-gradient(
+    135deg,
+    var(--accent-pink) 0%,
+    var(--accent-dark) 100%
+  );
   color: white;
   border: none;
   border-radius: 50px;
   font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(255, 182, 193, 0.4);
-  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+  transition: all 0.3s ease;
 }
+
 .close-btn:hover {
-  background-color: #ff9eb3;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 182, 193, 0.4);
 }
 
 /* ================================================= */
@@ -390,35 +555,53 @@ ul {
   padding-left: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
+
 li {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    var(--bg-white) 0%,
+    rgba(0, 220, 160, 0.02) 100%
+  );
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid rgba(0, 220, 160, 0.05);
+  overflow: hidden;
 }
+
 li:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0, 220, 160, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 220, 160, 0.15);
+  border-color: rgba(0, 220, 160, 0.2);
 }
+
 li a {
-  color: #555;
+  color: var(--text-dark);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   display: block;
-  padding: 15px 20px;
+  padding: 16px 20px;
   position: relative;
 }
+
 li a::after {
   content: "♪";
   position: absolute;
   right: 20px;
-  color: #00dca0;
-  opacity: 0.5;
+  color: var(--primary);
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
+
+li:hover a::after {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
 li a:hover {
-  color: #00dca0;
+  color: var(--primary);
 }
 
 /* ================================================= */
@@ -426,246 +609,315 @@ li a:hover {
 /* ================================================= */
 .song-info {
   text-align: center;
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(0, 220, 160, 0.1);
   margin-bottom: 40px;
   font-size: 0.95em;
+  border: 1px solid rgba(0, 220, 160, 0.12);
 }
+
 .song-info a {
-  color: #ffb6c1;
+  color: var(--accent-pink);
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
-  margin-top: 10px;
-  transition: 0.3s;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(255, 182, 193, 0.1);
 }
+
 .song-info a:hover {
-  color: #ff9eb3;
-  transform: scale(1.05);
+  color: var(--accent-dark);
+  background: rgba(255, 182, 193, 0.2);
+  transform: translateY(-2px);
 }
 
 .lyric-table {
   text-align: left;
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
-  border-radius: 15px;
+  background: #ffffff;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   margin-bottom: 40px;
+  border: 1px solid rgba(0, 220, 160, 0.1);
 }
+
 .lyric-table td {
-  padding: 12px 15px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 220, 160, 0.05);
 }
+
 .lyric-table tr:last-child td {
   border-bottom: none;
 }
+
 .lyric-table td:first-child {
   width: 50%;
+  font-weight: 600;
 }
+
 .lyric-table tr.spacer td {
-  padding: 10px 0;
+  padding: 8px 0;
   border-bottom: none;
 }
 
 /* ================================================= */
-/* 10. メンバーカラー設定                            */
+/* 10. メンバーカラー設定（改善版）                  */
 /* ================================================= */
 .hanyatan {
-  color: #67a7cc;
-  font-weight: bold;
+  color: var(--color-hanyatan);
+  font-weight: 700;
+  background: rgba(103, 167, 204, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .kirarin {
-  color: #e6c200;
-  font-weight: bold;
+  color: var(--color-kirarin);
+  font-weight: 700;
+  background: rgba(230, 194, 0, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .moeko {
-  color: red;
-  font-weight: bold;
+  color: var(--color-moeko);
+  font-weight: 700;
+  background: rgba(233, 30, 30, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .nacchan {
-  color: #fbb161;
-  font-weight: bold;
+  color: var(--color-nacchan);
+  font-weight: 700;
+  background: rgba(251, 177, 97, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .natsumin {
-  font-weight: bold;
+  color: var(--color-natsumin);
+  font-weight: 700;
+  background: rgba(138, 71, 137, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .momokyun {
-  color: #f09199;
-  font-weight: bold;
+  color: var(--color-momokyun);
+  font-weight: 700;
+  background: rgba(240, 145, 153, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .mirei {
-  color: #92d7e7;
-  font-weight: bold;
+  color: var(--color-mirei);
+  font-weight: 700;
+  background: rgba(146, 215, 231, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .hiichan {
-  color: #ff69b4;
-  font-weight: bold;
+  color: var(--color-hiichan);
+  font-weight: 700;
+  background: rgba(255, 105, 180, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .sayayan {
-  color: #c4c7b3;
-  font-weight: bold;
+  color: var(--color-sayayan);
+  font-weight: 700;
+  background: rgba(196, 199, 179, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .nanaka {
-  color: green;
-  font-weight: bold;
+  color: var(--color-nanaka);
+  font-weight: 700;
+  background: rgba(43, 168, 77, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .miruten {
-  color: #8a77b7;
-  font-weight: bold;
+  color: var(--color-miruten);
+  font-weight: 700;
+  background: rgba(138, 119, 183, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .shiorin {
-  color: blue;
-  font-weight: bold;
+  color: var(--color-shiorin);
+  font-weight: 700;
+  background: rgba(30, 58, 138, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 /* ================================================= */
 /* 11. スケジュールページ専用（マシュマロフロート風） */
 /* ================================================= */
-
-/* リスト全体の余白と間隔（少し広めにする） */
 .schedule-list {
   list-style-type: none;
   padding-left: 0;
   display: flex;
   flex-direction: column;
-  gap: 25px; /* カード同士の隙間を広げてふわふわ感を出す */
+  gap: 28px;
   margin-top: 30px;
 }
 
-/* 1つ1つの予定（カード）のデザイン：マシュマロフロート風 */
 .schedule-item {
-  /* 本物のマシュマロのような、渦巻くパステルカラーのグラデーション背景 */
   background: linear-gradient(
     135deg,
-    #fffafb 0%,
-    #e0f7fa 30%,
-    #fff3e0 60%,
-    #f3e5f5 100%
+    #ffffff 0%,
+    #fafcfb 30%,
+    #fff8f5 60%,
+    #ffffff 100%
   );
   background-size: 200% 200%;
-  animation: marshmallow-gradient 10s ease infinite; /* ゆっくり動かす */
+  animation: marshmallow-gradient 15s ease infinite;
 
-  /* 角を非常に丸くし、形を少し不規則にしてふわふわ感を出す */
-  border-radius: 40px 15px 40px 15px;
-  padding: 25px;
+  border-radius: 30px 15px 30px 15px;
+  padding: 28px;
 
-  /* 影を広く、薄くして、浮いているような演出 */
-  box-shadow: 0 10px 25px rgba(0, 220, 160, 0.08);
+  box-shadow: 0 8px 28px rgba(0, 220, 160, 0.12);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-  /* 左側のアクセント線を「泡」のようなデザインに */
   position: relative;
   overflow: hidden;
-  border-left: none; /* 元の線は消す */
+  border-left: none;
 }
 
-/* カードの左端に小さな泡（バブル）を追加 */
 .schedule-item::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 8px;
+  width: 6px;
   height: 100%;
-  background:
-    radial-gradient(circle, #ffb6c1 20%, transparent 20%),
-    radial-gradient(circle, #00dca0 20%, transparent 20%);
-  background-size: 10px 10px;
-  background-position:
-    0 0,
-    5px 5px;
-  opacity: 0.5;
+  background: linear-gradient(
+    180deg,
+    var(--primary) 0%,
+    var(--accent-pink) 100%
+  );
+  opacity: 0.6;
 }
 
-/* ホバー時の動きをより大きく、ふわっとさせる */
 .schedule-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(0, 220, 160, 0.15);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 220, 160, 0.18);
 }
 
-/* 1週間以内の予定（まもなく！）の特別デザイン：イチゴマシュマロ風 */
 .schedule-item.is-soon {
-  background: linear-gradient(135deg, #fff0f5 0%, #ffe0e9 50%, #fffafb 100%);
-  border: 2px dashed #ffb6c1; /* ピンクの点線枠 */
+  background: linear-gradient(
+    135deg,
+    #fff0f5 0%,
+    rgba(255, 182, 193, 0.15) 50%,
+    #fffafb 100%
+  );
+  border: 2px solid var(--accent-pink);
+  border-left: none;
 }
 
 .schedule-item.is-soon::before {
-  background:
-    radial-gradient(circle, #ffb6c1 20%, transparent 20%),
-    radial-gradient(circle, #ffffff 20%, transparent 20%);
-  background-size: 10px 10px;
+  background: linear-gradient(180deg, var(--accent-pink) 0%, #ff9eb3 100%);
   opacity: 0.8;
 }
 
-/* 日付のデザイン */
 .schedule-date {
-  font-weight: bold;
+  font-weight: 700;
   color: #888;
   font-size: 0.9em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
-/* まもなく！ラベルのデザイン：羽の生えたマシュマロ */
 .soon-label {
   display: inline-block;
-  background-color: #ffb6c1;
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-dark));
   color: white;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.8em;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 8px;
   position: relative;
-  /* 羽のような小さな丸を追加 */
-  box-shadow:
-    -5px 0 0 -2px #ffb6c1,
-    5px 0 0 -2px #ffb6c1;
-  animation: marshmallow-float 3s ease-in-out infinite; /* ぷかぷか浮かせる */
+  box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
+  animation: marshmallow-float 3s ease-in-out infinite;
 }
 
-/* カテゴリタグのデザイン：雲のような形 */
 .schedule-cat {
   display: inline-block;
-  background-color: #ffffff;
-  color: #00dca0;
-  border: 2px solid #00dca0;
-  padding: 5px 15px;
-  border-radius: 15px 15px 0 15px; /* 雲のような不規則な丸 */
+  background: linear-gradient(
+    135deg,
+    var(--bg-white) 0%,
+    rgba(0, 220, 160, 0.03) 100%
+  );
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 16px;
+  border-radius: 15px 15px 0 15px;
   font-size: 0.85em;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 15px;
-  box-shadow: 2px 2px 0 rgba(0, 220, 160, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 220, 160, 0.08);
+  transition: all 0.3s ease;
 }
 
-/* タイトルとリンクのデザイン */
+.schedule-cat:hover {
+  background: rgba(0, 220, 160, 0.05);
+  border-color: var(--primary-dark);
+}
+
 .schedule-title {
   font-size: 1.15em;
-  font-weight: bold;
-  color: #333;
-  /* 少し文字を丸く見せるフォント設定（もしあれば） */
+  font-weight: 700;
+  color: var(--text-dark);
 }
 
 .schedule-title a {
-  color: #333;
+  color: var(--text-dark);
   text-decoration: none;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.schedule-title a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
 }
 
 .schedule-title a:hover {
-  color: #00dca0;
-  text-decoration: underline;
+  color: var(--primary);
+}
+
+.schedule-title a:hover::after {
+  width: 100%;
 }
 
 /* ================================================= */
 /* アニメーション定義                                 */
 /* ================================================= */
-
-/* 背景グラデーションをゆっくり動かす */
 @keyframes marshmallow-gradient {
   0% {
     background-position: 0% 50%;
@@ -678,13 +930,54 @@ li a:hover {
   }
 }
 
-/* ラベルをぷかぷか浮かせる */
 @keyframes marshmallow-float {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+  }
+}
+
+/* ================================================= */
+/* レスポンシブ対応                                   */
+/* ================================================= */
+@media (max-width: 768px) {
+  body {
+    padding: 90px 16px 30px;
+  }
+
+  h1 {
+    padding: 20px;
+    font-size: 1.4em;
+  }
+
+  .schedule-item {
+    padding: 20px;
+    border-radius: 25px 12px 25px 12px;
+  }
+
+  .card {
+    padding: 25px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 85px 12px 20px;
+  }
+
+  .menu-cards {
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-list {
+    gap: 20px;
+  }
+
+  .schedule-date {
+    font-size: 0.85em;
   }
 }
