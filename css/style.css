@@ -753,7 +753,7 @@ li a:hover {
 .natsumin {
   color: var(--color-natsumin);
   font-weight: 700;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgb(0, 0, 0);
   padding: 2px 6px;
   border-radius: 4px;
 }
