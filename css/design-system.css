@@ -1,0 +1,215 @@
+/* Design system CSS — lightweight, accessible, 8pt grid
+   Place <link rel="stylesheet" href="css/design-system.css"> in <head>
+*/
+:root {
+  /* Colors */
+  --bg: #ffffff;
+  --surface: #fbfbfd;
+  --text: #0f1720;
+  --muted: #6b7280;
+  --accent: #0066ff; /* primary accent */
+  --accent-2: #ff6b6b; /* secondary */
+  --success: #16a34a;
+  --border: rgba(15, 23, 32, 0.08);
+
+  /* Typography */
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --fs-xxl: clamp(2rem, 1.6rem + 2.5vw, 2.5rem); /* H1 */
+  --fs-xl: clamp(1.5rem, 1.2rem + 1.5vw, 1.75rem); /* H2 */
+  --fs-lg: 1.125rem; /* H3 */
+  --fs-base: 1rem; /* body */
+  --fs-sm: 0.875rem; /* small */
+
+  /* Spacing (8pt base) */
+  --space-1: 4px; /* half */
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.06);
+  --shadow-md: 0 6px 18px rgba(2, 6, 23, 0.08);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0f14;
+    --surface: #0f1720;
+    --text: #e6eef8;
+    --muted: #9aa7b8;
+    --accent: #3390ff;
+    --border: rgba(230, 238, 248, 0.06);
+  }
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--fs-base);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* Container */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* Headings */
+h1 {
+  font-size: var(--fs-xxl);
+  margin: var(--space-4) 0 var(--space-3);
+  line-height: 1.05;
+}
+h2 {
+  font-size: var(--fs-xl);
+  margin: var(--space-4) 0 var(--space-2);
+}
+h3 {
+  font-size: var(--fs-lg);
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+/* Utility text */
+.kicker {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.muted {
+  color: var(--muted);
+}
+
+/* Card */
+.card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: var(--space-3);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.card--compact {
+  padding: var(--space-2);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:focus {
+  outline: 3px solid rgba(0, 102, 255, 0.16);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: linear-gradient(
+    180deg,
+    var(--accent),
+    color-mix(in srgb, var(--accent) 80%, black)
+  );
+  color: #fff;
+  border-color: transparent;
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* Link style */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:focus,
+a:hover {
+  text-decoration: underline;
+}
+
+/* Form elements */
+.input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+/* Responsive grid */
+.grid {
+  display: grid;
+  gap: var(--space-3);
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-responsive {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Small helpers */
+.row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Accessibility: focus visible only for keyboard users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Microinteraction: subtle hover lift for cards */
+.card:hover {
+  transform: translateY(-3px);
+  transition: transform 180ms ease;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  :root {
+    --space-3: 12px;
+  }
+  .container {
+    padding: 0 var(--space-2);
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+}
