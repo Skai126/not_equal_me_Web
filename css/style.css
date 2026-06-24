@@ -5,11 +5,14 @@
 /* ================================================= */
 :root {
   /* Main Colors */
-  --primary: #00dca0; /* Emerald Green */
-  --primary-dark: #00a070; /* Deep Emerald */
-  --primary-light: #33f0b8; /* Light Emerald */
-  --accent-pink: #ffb6c1; /* Pink */
-  --accent-dark: #ff9eb3; /* Dark Pink */
+  --primary: #00c997; /* ≠ME Emerald Green */
+  --primary-dark: #008d72; /* Deep Emerald */
+  --primary-light: #65e7c3; /* Light Emerald */
+  --primary-soft: #e7fff7;
+  --accent-pink: #ff7fa7;
+  --accent-dark: #e85d88;
+  --accent-yellow: #ffd96a;
+  --accent-blue: #67a7cc;
 
   /* Member Colors */
   --color-hanyatan: #67a7cc; /* Blue */
@@ -28,9 +31,11 @@
   /* Neutrals */
   --bg-light: #f0fdf9; /* Very light emerald tint */
   --bg-white: #ffffff;
-  --text-dark: #333333;
-  --text-muted: #777777;
-  --border-light: rgba(0, 220, 160, 0.1);
+  --text-dark: #263431;
+  --text-muted: #64716e;
+  --border-light: rgba(0, 201, 151, 0.18);
+  --shadow-soft: 0 14px 34px rgba(0, 141, 114, 0.12);
+  --radius: 8px;
 }
 
 /* ================================================= */
@@ -43,12 +48,11 @@ body {
   margin: 0;
   padding: 100px 20px 40px;
   color: var(--text-dark);
-  background: linear-gradient(
-    135deg,
-    #f5f9f8 0%,
-    #f0f8f6 50%,
-    #f3faf8 100%
-  );
+  background:
+    linear-gradient(135deg, rgba(0, 201, 151, 0.12), transparent 32%),
+    linear-gradient(45deg, rgba(255, 127, 167, 0.1), transparent 36%),
+    linear-gradient(180deg, #f8fffc 0%, #eefbf7 100%);
+  background-attachment: fixed;
 }
 
 .page-content,
@@ -56,6 +60,11 @@ body {
   max-width: 850px;
   margin: 0 auto;
   animation: fadeIn 0.5s ease-out;
+}
+
+.page-content > p:not([class]) {
+  color: var(--text-muted);
+  text-align: center;
 }
 
 @keyframes fadeIn {
@@ -73,9 +82,10 @@ body {
 /* 2. ヘッダー＆ハンバーガーメニュー（全ページ共通） */
 /* ================================================= */
 header {
-  background: linear-gradient(90deg, var(--bg-white) 0%, #f9fffe 100%);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
   box-shadow:
-    0 4px 15px rgba(0, 220, 160, 0.12),
+    0 4px 15px rgba(0, 201, 151, 0.12),
     0 2px 5px rgba(0, 0, 0, 0.05);
   padding: 15px 20px;
   display: flex;
@@ -90,13 +100,13 @@ header {
 }
 
 .site-logo {
-  color: var(--primary);
+  color: var(--primary-dark);
   font-weight: bold;
   font-size: 1.2em;
   text-decoration: none;
-  border: 2px solid var(--primary);
+  border: 1px solid rgba(0, 201, 151, 0.34);
   padding: 8px 18px;
-  border-radius: 25px;
+  border-radius: var(--radius);
   transition: all 0.3s ease;
   background: linear-gradient(
     135deg,
@@ -111,7 +121,7 @@ header {
     rgba(0, 220, 160, 0.1) 0%,
     rgba(51, 240, 184, 0.1) 100%
   );
-  box-shadow: 0 4px 10px rgba(0, 220, 160, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 201, 151, 0.2);
   transform: translateY(-2px);
 }
 
@@ -124,24 +134,52 @@ header {
   flex-direction: column;
   gap: 6px;
   z-index: 1000;
-  background: none;
-  border: none;
-  font-size: 2em;
-  color: var(--primary);
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid rgba(0, 201, 151, 0.32);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 22px rgba(0, 141, 114, 0.12);
+  font-size: 1.8em;
+  color: var(--primary-dark);
   font-weight: bold;
   transition: all 0.3s ease;
   padding: 5px;
   transform-origin: center;
 }
 
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  border-radius: 999px;
+  background: currentColor;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
 .hamburger:hover {
   color: var(--accent-pink);
-  transform: scale(1.1) rotate(-5deg);
+  transform: translateY(-2px);
 }
 
 .hamburger.active {
   color: var(--accent-pink);
-  transform: scale(1.1) rotate(15deg);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 .nav-menu {
@@ -153,9 +191,10 @@ header {
   background: linear-gradient(
     180deg,
     var(--primary) 0%,
-    var(--primary-dark) 100%
+    var(--primary-dark) 72%,
+    #126b80 100%
   );
-  box-shadow: -4px 0 15px rgba(0, 220, 160, 0.3);
+  box-shadow: -4px 0 24px rgba(0, 141, 114, 0.28);
   transition: 0.3s ease-in-out;
   z-index: 500;
   padding-top: 80px;
@@ -180,7 +219,7 @@ header {
 .nav-menu a:hover {
   background: rgba(255, 255, 255, 0.15);
   padding-left: 40px;
-  border-left: 4px solid var(--accent-pink);
+  border-left: 4px solid var(--accent-yellow);
 }
 
 /* ================================================= */
@@ -190,16 +229,16 @@ header {
 .back-to-top {
   background: linear-gradient(
     135deg,
-    var(--accent-pink) 0%,
-    var(--accent-dark) 100%
+    var(--primary) 0%,
+    var(--primary-dark) 100%
   );
   color: white !important;
   text-decoration: none;
   padding: 10px 18px;
-  border-radius: 50px;
+  border-radius: var(--radius);
   font-weight: bold;
   display: inline-block;
-  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 201, 151, 0.22);
   transition: all 0.3s ease;
   font-size: 0.9em;
   border: none;
@@ -219,7 +258,7 @@ header {
 .back-link:hover,
 .back-to-top:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(255, 182, 193, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 141, 114, 0.26);
 }
 
 /* ================================================= */
@@ -227,28 +266,30 @@ header {
 /* ================================================= */
 h1 {
   text-align: center;
-  color: var(--primary);
-  background: linear-gradient(
-    135deg,
-    var(--bg-white) 0%,
-    rgba(0, 220, 160, 0.03) 100%
-  );
+  color: var(--primary-dark);
+  background:
+    linear-gradient(90deg, var(--primary), var(--accent-pink), var(--accent-yellow), var(--accent-blue)) top / 100% 4px no-repeat,
+    linear-gradient(135deg, var(--bg-white) 0%, rgba(0, 201, 151, 0.05) 100%);
   padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 5px 18px rgba(0, 220, 160, 0.12);
-  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0, 201, 151, 0.22);
   margin-top: 0;
   font-weight: 800;
 }
 
 .hero-title {
-  background: none;
+  background:
+    linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
   border: none;
   box-shadow: none;
   padding: 0;
   margin-bottom: 40px;
-  color: var(--text-dark);
-  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: transparent;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.25;
 }
 
 h2 {
@@ -257,12 +298,12 @@ h2 {
     var(--bg-white) 0%,
     rgba(255, 182, 193, 0.03) 100%
   );
-  border-radius: 15px;
+  border-radius: var(--radius);
   border-left: 6px solid var(--accent-pink);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
   margin-top: 40px;
   font-size: 1.2em;
-  padding: 0 20px;
+  padding: 10px 20px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -283,13 +324,13 @@ h2:hover {
 }
 
 .card {
-  background: linear-gradient(135deg, #ffffff 0%, #fafcfb 100%);
+  background: #ffffff;
   padding: 30px 25px;
-  border-radius: 20px;
+  border-radius: var(--radius);
   text-align: center;
   text-decoration: none;
   color: var(--text-muted);
-  box-shadow: 0 6px 20px rgba(0, 220, 160, 0.12);
+  box-shadow: var(--shadow-soft);
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   border: 2px solid transparent;
   position: relative;
@@ -307,14 +348,15 @@ h2:hover {
     90deg,
     var(--primary),
     var(--accent-pink),
-    var(--primary)
+    var(--accent-yellow),
+    var(--accent-blue)
   );
   transition: left 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 28px rgba(0, 220, 160, 0.18);
+  box-shadow: 0 18px 38px rgba(0, 141, 114, 0.18);
   border-color: var(--primary);
 }
 
@@ -354,10 +396,10 @@ h2:hover {
 .card.schedules {
   background: linear-gradient(
     135deg,
-    rgba(0, 220, 160, 0.05) 0%,
+    rgba(0, 201, 151, 0.05) 0%,
     rgba(255, 182, 193, 0.03) 100%
   );
-  border-left: 6px solid var(--primary);
+  border-bottom: 4px solid var(--accent-yellow);
 }
 
 /* ================================================= */
@@ -371,9 +413,9 @@ h2:hover {
 }
 
 .release-card {
-  background: linear-gradient(135deg, #ffffff 0%, #fafcfb 100%);
-  border: 2px solid rgba(0, 220, 160, 0.2);
-  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 201, 151, 0.22);
+  border-radius: var(--radius);
   padding: 0;
   text-align: center;
   cursor: pointer;
@@ -382,7 +424,7 @@ h2:hover {
   box-sizing: border-box;
   overflow: hidden;
   transform: translateZ(0);
-  box-shadow: 0 6px 18px rgba(0, 220, 160, 0.12);
+  box-shadow: var(--shadow-soft);
   position: relative;
 }
 
@@ -395,8 +437,8 @@ h2:hover {
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(0, 220, 160, 0.1),
-    rgba(255, 182, 193, 0.1)
+    rgba(0, 201, 151, 0.12),
+    rgba(255, 127, 167, 0.1)
   );
   pointer-events: none;
   transition: left 0.4s ease;
@@ -404,7 +446,7 @@ h2:hover {
 
 .release-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(0, 220, 160, 0.2);
+  box-shadow: 0 18px 38px rgba(0, 141, 114, 0.18);
   border-color: var(--primary);
 }
 
@@ -420,10 +462,10 @@ h2:hover {
   object-fit: cover;
   display: block;
   box-sizing: border-box;
-  border-radius: 18px 18px 0 0;
+  border-radius: var(--radius) var(--radius) 0 0;
   margin: 0;
   padding: 0;
-  border-bottom: 2px solid rgba(0, 220, 160, 0.1);
+  border-bottom: 2px solid rgba(0, 201, 151, 0.1);
   transition: transform 0.4s ease;
 }
 
@@ -475,14 +517,14 @@ h2:hover {
   width: 100%;
   max-height: 85vh;
   background: linear-gradient(180deg, #ffffff 0%, #fafcfb 100%);
-  border-radius: 24px 24px 0 0;
+  border-radius: var(--radius) var(--radius) 0 0;
   padding: 30px 20px 40px;
   box-sizing: border-box;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow-y: auto;
   box-shadow:
-    0 -8px 28px rgba(0, 220, 160, 0.15),
+    0 -8px 28px rgba(0, 201, 151, 0.15),
     0 -2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -534,7 +576,7 @@ h2:hover {
   );
   color: white;
   border: none;
-  border-radius: 50px;
+  border-radius: var(--radius);
   font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
@@ -564,17 +606,17 @@ li {
     var(--bg-white) 0%,
     rgba(0, 220, 160, 0.02) 100%
   );
-  border-radius: 14px;
+  border-radius: var(--radius);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  border: 1px solid rgba(0, 220, 160, 0.05);
+  border: 1px solid rgba(0, 201, 151, 0.08);
   overflow: hidden;
 }
 
 li:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 220, 160, 0.15);
-  border-color: rgba(0, 220, 160, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 141, 114, 0.15);
+  border-color: rgba(0, 201, 151, 0.2);
 }
 
 li a {
@@ -611,11 +653,11 @@ li a:hover {
   text-align: center;
   background: #ffffff;
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 3px 12px rgba(0, 220, 160, 0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
   margin-bottom: 40px;
   font-size: 0.95em;
-  border: 1px solid rgba(0, 220, 160, 0.12);
+  border: 1px solid rgba(0, 201, 151, 0.16);
 }
 
 .song-info a {
@@ -626,7 +668,7 @@ li a:hover {
   margin-top: 12px;
   transition: all 0.3s ease;
   padding: 6px 12px;
-  border-radius: 20px;
+  border-radius: var(--radius);
   background: rgba(255, 182, 193, 0.1);
 }
 
@@ -641,11 +683,11 @@ li a:hover {
   width: 100%;
   border-collapse: collapse;
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   margin-bottom: 40px;
-  border: 1px solid rgba(0, 220, 160, 0.1);
+  border: 1px solid rgba(0, 201, 151, 0.12);
 }
 
 .lyric-table td {
@@ -766,9 +808,226 @@ li a:hover {
   border-radius: 4px;
 }
 
+.hanyatan,
+.kirarin,
+.moeko,
+.nacchan,
+.natsumin,
+.momokyun,
+.mirei,
+.hiichan,
+.sayayan,
+.nanaka,
+.miruten,
+.shiorin {
+  display: inline-block;
+  margin: 1px 2px;
+  border: 1px solid currentColor;
+  line-height: 1.35;
+}
+
 /* ================================================= */
-/* 11. スケジュールページ専用（マシュマロフロート風） */
+/* 11. コール集ページ専用                            */
 /* ================================================= */
+.intro-text {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  line-height: 1.8;
+  background: #ffffff;
+  padding: 18px 20px;
+  border: 1px solid rgba(0, 201, 151, 0.14);
+  border-left: 6px solid var(--accent-pink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.song-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 201, 151, 0.16);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.song-header {
+  background:
+    linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent-pink));
+  color: white;
+  padding: 15px 20px;
+  font-size: 1.18em;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.song-content {
+  padding: 22px;
+}
+
+.part-label {
+  display: inline-block;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  padding: 5px 12px;
+  border: 1px solid rgba(0, 201, 151, 0.2);
+  border-radius: var(--radius);
+  font-size: 0.85em;
+  font-weight: 800;
+  margin: 18px 0 10px;
+}
+
+.call-block {
+  margin-bottom: 12px;
+  line-height: 1.9;
+}
+
+.lyrics {
+  color: var(--text-dark);
+}
+
+.call {
+  color: var(--accent-dark);
+  font-weight: 800;
+  background: rgba(255, 127, 167, 0.12);
+  border: 1px solid rgba(255, 127, 167, 0.24);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.mix-call {
+  color: #2f72b9;
+  font-weight: 800;
+  font-size: 0.95em;
+  letter-spacing: 0.04em;
+  background: rgba(103, 167, 204, 0.12);
+  border-left: 4px solid var(--accent-blue);
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+}
+
+/* ================================================= */
+/* 12. スケジュールページ専用                         */
+/* ================================================= */
+.jump-btn,
+.download-all-btn,
+.clear-btn {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.jump-btn,
+.download-all-btn {
+  display: block;
+  width: min(100%, 420px);
+  margin: 18px auto;
+  padding: 12px 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0, 141, 114, 0.18);
+}
+
+.download-all-btn {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-dark));
+}
+
+.jump-btn:hover,
+.download-all-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 141, 114, 0.22);
+}
+
+.filter-area {
+  background: #ffffff;
+  border: 1px solid rgba(0, 201, 151, 0.16);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 18px;
+  margin: 24px 0;
+}
+
+.filter-area p {
+  display: none;
+}
+
+.filter-section + .filter-section {
+  margin-top: 16px;
+}
+
+.filter-label {
+  color: var(--primary-dark);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.clear-btn {
+  color: var(--primary-dark);
+  background: var(--primary-soft);
+  border: 1px solid rgba(0, 201, 151, 0.25);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+}
+
+.clear-btn:hover {
+  background: rgba(0, 201, 151, 0.14);
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill-label {
+  display: inline-flex;
+}
+
+.pill-label input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pill-text {
+  color: var(--text-muted);
+  background: #ffffff;
+  border: 1px solid rgba(0, 201, 151, 0.2);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  font-weight: 700;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.pill-label input:checked + .pill-text {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-color: transparent;
+}
+
+#loading {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 20px;
+}
+
 .schedule-list {
   list-style-type: none;
   padding-left: 0;
@@ -779,20 +1038,11 @@ li a:hover {
 }
 
 .schedule-item {
-  background: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #fafcfb 30%,
-    #fff8f5 60%,
-    #ffffff 100%
-  );
-  background-size: 200% 200%;
-  animation: marshmallow-gradient 15s ease infinite;
-
-  border-radius: 30px 15px 30px 15px;
+  background: #ffffff;
+  border-radius: var(--radius);
   padding: 28px;
 
-  box-shadow: 0 8px 28px rgba(0, 220, 160, 0.12);
+  box-shadow: var(--shadow-soft);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   position: relative;
@@ -816,8 +1066,8 @@ li a:hover {
 }
 
 .schedule-item:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0, 220, 160, 0.18);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 141, 114, 0.18);
 }
 
 .schedule-item.is-soon {
@@ -851,7 +1101,7 @@ li a:hover {
   background: linear-gradient(135deg, var(--accent-pink), var(--accent-dark));
   color: white;
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: var(--radius);
   font-size: 0.8em;
   font-weight: bold;
   margin-left: 8px;
@@ -868,13 +1118,13 @@ li a:hover {
     rgba(0, 220, 160, 0.03) 100%
   );
   color: var(--primary);
-  border: 2px solid var(--primary);
+  border: 1px solid rgba(0, 201, 151, 0.4);
   padding: 6px 16px;
-  border-radius: 15px 15px 0 15px;
+  border-radius: var(--radius);
   font-size: 0.85em;
   font-weight: 700;
   margin-bottom: 15px;
-  box-shadow: 0 2px 8px rgba(0, 220, 160, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 201, 151, 0.08);
   transition: all 0.3s ease;
 }
 
@@ -955,11 +1205,22 @@ li a:hover {
 
   .schedule-item {
     padding: 20px;
-    border-radius: 25px 12px 25px 12px;
+    border-radius: var(--radius);
   }
 
   .card {
     padding: 25px 18px;
+  }
+
+  .song-header {
+    font-size: 1.05em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .song-content {
+    padding: 18px;
   }
 }
 
