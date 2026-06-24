@@ -405,11 +405,6 @@ h2:hover {
 }
 
 .card.schedules {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 201, 151, 0.05) 0%,
-    rgba(255, 182, 193, 0.03) 100%
-  );
   border-bottom: 4px solid var(--accent-yellow);
 }
 
